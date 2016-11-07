@@ -26,7 +26,9 @@ get '/twiml' => sub {
             default => 'not defined',
         }
     ]);
-    $c->render('twiml.tx', { alertId => $result->valid->get('alertId') });
+    my $res = $c->render('twiml.tx', { alertId => $result->valid->get('alertId') });
+    $res->content_type('text/xml; charset=UTF-8');
+    $res;
 };
 
 get '/json' => sub {
