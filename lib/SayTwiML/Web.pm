@@ -19,6 +19,16 @@ get '/' => [qw/set_title/] => sub {
     $c->render('index.tx', { greeting => "Hello" });
 };
 
+get '/twiml' => sub {
+    my ( $self, $c )  = @_;
+    my $result = $c->req->validator([
+        'alertId' => {
+            default => 'not defined',
+        }
+    ]);
+    $c->render('twiml.tx', { alertId => $result->valid->get('alertId') });
+};
+
 get '/json' => sub {
     my ( $self, $c )  = @_;
     my $result = $c->req->validator([
