@@ -31,18 +31,5 @@ get '/twiml' => sub {
     $res;
 };
 
-get '/json' => sub {
-    my ( $self, $c )  = @_;
-    my $result = $c->req->validator([
-        'q' => {
-            default => 'Hello',
-            rule => [
-                [['CHOICE',qw/Hello Bye/],'Hello or Bye']
-            ],
-        }
-    ]);
-    $c->render_json({ greeting => $result->valid->get('q') });
-};
-
 1;
 
