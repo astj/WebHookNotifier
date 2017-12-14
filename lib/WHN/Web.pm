@@ -4,6 +4,8 @@ use strict;
 use warnings;
 use utf8;
 use Kossy;
+use Furl;
+use JSON::MaybeXS qw/encode_json/;
 
 filter 'set_title' => sub {
     my $app = shift;
@@ -19,16 +21,14 @@ get '/' => [qw/set_title/] => sub {
     $c->render('index.tx', { greeting => "Hello" });
 };
 
-get '/twiml' => sub {
+post '/notify' => sub {
     my ( $self, $c )  = @_;
-    my $result = $c->req->validator([
-        'alertId' => {
-            default => 'not defined',
-        }
-    ]);
-    my $res = $c->render('twiml.tx', { alertId => $result->valid->get('alertId') });
-    $res->content_type('text/xml; charset=UTF-8');
-    $res;
+
+    my $payload = +{ text => sprintf('```%s```', $c->req->content) };
+    my $furl = Furl->new;
+    $furl->post($ENV{WEBHOOK_URL}, ['Content-Type', 'application/json'], encode_json($payload));
+
+    $c->render_json($payload);
 };
 
 1;
