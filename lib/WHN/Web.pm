@@ -1,4 +1,4 @@
-package SayTwiML::Web;
+package WHN::Web;
 
 use strict;
 use warnings;

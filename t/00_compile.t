@@ -3,8 +3,8 @@ use warnings;
 use Test::More;
 
 use_ok $_ for qw(
-    SayTwiML
-    SayTwiML::Web
+    WHN
+    WHN::Web
 );
 
 done_testing;

@@ -3,11 +3,11 @@ use lib "$FindBin::Bin/extlib/lib/perl5";
 use lib "$FindBin::Bin/lib";
 use File::Basename;
 use Plack::Builder;
-use SayTwiML::Web;
+use WHN::Web;
 
 my $root_dir = File::Basename::dirname(__FILE__);
 
-my $app = SayTwiML::Web->psgi($root_dir);
+my $app = WHN::Web->psgi($root_dir);
 builder {
     enable 'ReverseProxy';
     enable 'Static',

@@ -1,8 +1,8 @@
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-    NAME          => 'SayTwiML',
-    VERSION_FROM  => 'lib/SayTwiML.pm',
+    NAME          => 'WHN',
+    VERSION_FROM  => 'lib/WHN.pm',
     PREREQ_PM     => {
         'Kossy' =>  '0.40',
     },
